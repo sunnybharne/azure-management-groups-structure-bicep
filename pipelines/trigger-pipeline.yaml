@@ -1,0 +1,44 @@
+name: management-group-structure
+
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  name: selfhosted
+
+parameters:
+  - name: deploymentName
+    type: string
+    default: 'deploy-management-group'
+  - name: serviceConnectionName
+    type: string
+    default: ''
+  - name: location
+    type: string
+    default: 'swedencentral'
+
+variables:
+  - name: parametersFile
+    value: 'management-groups/main.bicepparam'
+
+stages:
+- stage:
+  jobs:
+  - job: ${{ parameters.deploymentName }}
+    steps:
+    - bash: echo ${{ parameters.deploymentName }}
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: ${{ parameters.serviceConnectionName }}
+        scriptType: ps
+        scriptLocation: 'inlineScript' #| 'scriptPath'
+          # scriptPath: 
+        #arguments: 
+        inlineScript: |
+          az deployment tenant create \
+                --location ${{parameters.location}} \
+                --parameters @${{variables.parametersFile}} \
+                --name ${{parameters.deploymentName}}
+        powerShellErrorActionPreference: 'stop' # | 'continue' | 'silentlyContinue'
