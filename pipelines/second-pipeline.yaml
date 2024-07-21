@@ -2,7 +2,7 @@ name: second-pipeline
 
 resources:
   pipelines:
-  - pipeline: ranomevar
+  - pipeline: trigger-pipeline
     source: trigger-pipeline 
     trigger: true
 
