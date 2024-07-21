@@ -1,5 +1,7 @@
 name: second-pipeline
 
+trigger: none
+
 resources:
   pipelines:
   - pipeline: trigger-pipeline
