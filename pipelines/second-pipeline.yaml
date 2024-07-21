@@ -1,5 +1,10 @@
 name: second-pipeline
 
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline 
+    source: trigger-pipeline 
+    trigger: true
 
 pool:
   name: selfhosted
