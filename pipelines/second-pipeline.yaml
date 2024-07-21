@@ -4,7 +4,9 @@ resources:
   pipelines:
   - pipeline: trigger-pipeline
     source: trigger-pipeline 
-    trigger: true
+    trigger: 
+      stages:
+        - A
 
 pool:
   name: selfhosted
