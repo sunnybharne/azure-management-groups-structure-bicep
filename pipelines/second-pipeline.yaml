@@ -1,0 +1,12 @@
+name: second-pipeline
+
+
+pool:
+  name: selfhosted
+
+stages: 
+- stage: B
+  jobs:
+  - job: 
+    steps:
+    - bash: echo 'Stage B'
